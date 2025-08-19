@@ -33,9 +33,11 @@ def markdown_to_html_node(doc):
                 html_node = ParentNode(f"h{hnum}", block_html_children)
             case BlockType.CODE:
                 # wrap with <pre></pre> and treat block as one long text node without the wrapping ```...``` ie. do not add inner html
+                stripped_block = block[3:len(block)].strip()
                 # should remove leading and trailing \n 
-                stripped_block = block[3:len(block)-3].strip()
-                html_node = ParentNode("pre", [LeafNode("code", block[3:len(block)-3])])
+                stripped_block = re.sub("^(\n)+$", "", stripped_block)
+                stripped_block = re.sub("(\n)*```", "", stripped_block)
+                html_node = ParentNode("pre", [LeafNode("code", stripped_block)])
             case BlockType.QUOTE:
                 #remove all > characters that follow a newline
                 split_block = block[1:len(block)].split("\n>")
