@@ -54,7 +54,7 @@ def markdown_to_html_node(doc):
                 #create parent nodes out of each of these splits
                 ol_children = []
                 for split in split_block:
-                    ol_children.append(ParentNode('li', text_to_children(text_to_nodes(split))))
+                    ol_children.append(ParentNode('li', text_to_children(text_to_nodes(split.strip()))))
                 html_node = ParentNode("ol", ol_children)
             case BlockType.UNORDERED_LIST:
                 #remove all - characters
@@ -62,7 +62,7 @@ def markdown_to_html_node(doc):
                 #create parent nodes out of each of these splits
                 ol_children = []
                 for split in split_block:
-                    ol_children.append(ParentNode('li', text_to_children(text_to_nodes(split))))
+                    ol_children.append(ParentNode('li', text_to_children(text_to_nodes(split.strip()))))
                 html_node = ParentNode("ul", ol_children)
             case _:
                 printf(f"unsupported case {block_type}")

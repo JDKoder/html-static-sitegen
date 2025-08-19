@@ -39,13 +39,43 @@ the **same** even with inline stuff
         > There are many like it but this one is mine
         > Without me, my quote is nothing
         > Without my quote, **I** am nothing"""
-
         node = markdown_to_html_node(md)
         html = node.to_html()
-
         self.assertEqual(
             html,
             "<div><blockquote>This is a <i>quote</i>\nThere are many like it but this one is mine\nWithout me, my quote is nothing\nWithout my quote, <b>I</b> am nothing</blockquote></div>"
         )
+
+
+    def test_unordered_list(self):
+        md = """- This is an _unordered list_
+        - There are many like it but this one is mine
+        - Without me, my unordered list is nothing
+        - Without my unordered list, **I** am nothing"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ul><li>This is an <i>unordered list</i></li><li>There are many like it but this one is mine</li><li>Without me, my unordered list is nothing</li><li>Without my unordered list, <b>I</b> am nothing</li></ul></div>"
+        )
+
+
+    def test_ordered_list(self):
+        md = """1. This is an _ordered list_
+        2. There are many like it but this one is mine
+        3. Without me, my ordered list is nothing
+        4. Without my ordered list, **I** am nothing"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(
+            html,
+            "<div><ol><li>This is an <i>ordered list</i></li><li>There are many like it but this one is mine</li><li>Without me, my ordered list is nothing</li><li>Without my ordered list, <b>I</b> am nothing</li></ol></div>"
+        )
+
+
+
+
+
+
 
 
