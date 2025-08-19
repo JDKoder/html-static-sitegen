@@ -5,6 +5,7 @@ def text_node_to_html_node(text_node):
     if text_node is None:
         raise ValueError("Expected TextType but was None")
     match text_node.text_type:
+        #text nodes have no tag, we rely on htmlconverter t
         case TextType.TEXT:
             return LeafNode(None, text_node.text)
         case TextType.BOLD:

@@ -26,12 +26,3 @@ class TextNode:
     def __repr__(self):
         return f"TextNode({self.text}, {self.text_type}, {self.url})"
 
-"""
-#Testing node creation
-test_node = TextNode("hello Jacob", TextType.TEXT, "http://word.com")
-print(test_node)
-
-#Testing TextNode eq comparison
-clone_node = TextNode("**I'm some bod text**", TextType.BOLD, "http://foo.com")
-print(test_node == clone_node)
-"""
