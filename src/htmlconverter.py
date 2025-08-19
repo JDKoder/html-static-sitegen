@@ -42,6 +42,7 @@ def markdown_to_html_node(doc):
                 #remove all > characters that follow a newline
                 split_block = block[1:len(block)].split("\n>")
                 #Replace the newline characters without the '>'
+                split_block = strip_splits(split_block)
                 formatted_block = "\n".join(split_block)
                 #Now that the wrapping markdown is removed, we can conver the text into nodes
                 text_nodes = text_to_nodes(formatted_block)
@@ -69,7 +70,12 @@ def markdown_to_html_node(doc):
     return ParentNode("div", html_nodes)
 
 
-#Takes a list of text nodes and converts them into html leaf nodes
+def strip_splits(splits):
+    for split in range(len(splits)):
+        splits[split] = splits[split].strip()#Takes a list of text nodes and converts them into html leaf nodes
+    return splits
+
+
 def text_to_children(text_nodes):
     leaf_html_nodes = []
     for text_node in text_nodes:

@@ -34,4 +34,18 @@ the **same** even with inline stuff
             "<div><pre><code>This is text that _should_ remain\nthe **same** even with inline stuff</code></pre></div>",
         )
 
+    def test_quote(self):
+        md = """> This is a _quote_
+        > There are many like it but this one is mine
+        > Without me, my quote is nothing
+        > Without my quote, **I** am nothing"""
+
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+
+        self.assertEqual(
+            html,
+            "<div><blockquote>This is a <i>quote</i>\nThere are many like it but this one is mine\nWithout me, my quote is nothing\nWithout my quote, <b>I</b> am nothing</blockquote></div>"
+        )
+
 
