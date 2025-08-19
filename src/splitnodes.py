@@ -1,7 +1,8 @@
 from textnode import TextNode, TextType
 from extractmd import extract_markdown_link, extract_markdown_images
 
-
+#Takes a markdown document and splits it into a list of blocks delimited by a double newline
+#Each block is further split to lines, has each line stripped of leading and trailing whitespace and rejoined with newlines
 def split_doc_to_blocks(doc):
     blocks = doc.split("\n\n")
     final_blocks = []

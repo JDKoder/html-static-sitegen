@@ -73,6 +73,77 @@ the **same** even with inline stuff
         )
 
 
+    def test_header_h1(self):
+        md = """# Header"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(html, "<div><h1>Header</h1></div>")
+
+
+
+    def test_header_h2(self):
+        md = """## Header"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(html, "<div><h2>Header</h2></div>")
+
+
+    def test_header_h3(self):
+        md = """### Header"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(html, "<div><h3>Header</h3></div>")
+
+
+    def test_header_h4(self):
+        md = """#### Header"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(html, "<div><h4>Header</h4></div>")
+
+
+    def test_header_h5(self):
+        md = """##### Header"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(html, "<div><h5>Header</h5></div>")
+
+
+    def test_header_h6(self):
+        md = """###### Header"""
+        node = markdown_to_html_node(md)
+        html = node.to_html()
+        self.assertEqual(html, "<div><h6>Header</h6></div>")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

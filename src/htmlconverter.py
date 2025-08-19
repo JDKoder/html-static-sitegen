@@ -65,7 +65,7 @@ def markdown_to_html_node(doc):
                     ol_children.append(ParentNode('li', text_to_children(text_to_nodes(split.strip()))))
                 html_node = ParentNode("ul", ol_children)
             case _:
-                printf(f"unsupported case {block_type}")
+                raise ValueError(f"unsupported case {block_type}")
         html_nodes.append(html_node)
     return ParentNode("div", html_nodes)
 
