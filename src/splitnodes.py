@@ -6,9 +6,15 @@ def split_doc_to_blocks(doc):
     blocks = doc.split("\n\n")
     final_blocks = []
     for block in blocks:
+        #If the block is empty, skip it to the next one
         if block.strip() == "":
             continue
-        block = block.strip()
+        #format each block line of the block so none have trailing whitespace
+        splits = block.split("\n")
+        f_splits = []
+        for split in splits:
+            f_splits.append( split.strip())
+        block = "\n".join(f_splits).strip()
         final_blocks.append(block)
     return final_blocks
 

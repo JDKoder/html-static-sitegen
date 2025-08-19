@@ -17,6 +17,8 @@ def markdown_to_html_node(doc):
         html_node = None;
         match (block_type):
             case BlockType.PARAGRAPH:
+                #remove newlines from this block type
+                block = " ".join(block.split("\n"))
                 text_nodes = text_to_nodes(block)
                 block_html_children = text_to_children(text_nodes)
                 html_node = ParentNode("p", block_html_children)
@@ -26,12 +28,13 @@ def markdown_to_html_node(doc):
                     hnum += 1
                     if block[hnum] != "#":
                         break
-                }
                 text_nodes = text_to_nodes(block[hnum:len(block)].strip())
                 block_html_children = text_to_children(text_nodes)
                 html_node = ParentNode(f"h{hnum}", block_html_children)
             case BlockType.CODE:
                 # wrap with <pre></pre> and treat block as one long text node without the wrapping ```...``` ie. do not add inner html
+                # should remove leading and trailing \n 
+                stripped_block = block[3:len(block)-3].strip()
                 html_node = ParentNode("pre", [LeafNode("code", block[3:len(block)-3])])
             case BlockType.QUOTE:
                 #remove all > characters that follow a newline
@@ -42,7 +45,7 @@ def markdown_to_html_node(doc):
                 text_nodes = text_to_nodes(formatted_block)
                 block_html_children = text_to_children(text_nodes)
                 html_node = ParentNode("blockquote", block_html_children)
-            case ORDERED_LIST:
+            case BlockType.ORDERED_LIST:
                 #remove all - characters
                 split_block = re.split("\n[1-9][0-9]*[.]", block[2:len(block)])
                 #create parent nodes out of each of these splits
@@ -50,7 +53,7 @@ def markdown_to_html_node(doc):
                 for split in split_block:
                     ol_children.append(ParentNode('li', text_to_children(text_to_nodes(split))))
                 html_node = ParentNode("ol", ol_children)
-            case UNORDERED_LIST:
+            case BlockType.UNORDERED_LIST:
                 #remove all - characters
                 split_block = re.split("\n-", block[1:len(block)])
                 #create parent nodes out of each of these splits
@@ -65,7 +68,7 @@ def markdown_to_html_node(doc):
 
 
 #Takes a list of text nodes and converts them into html leaf nodes
-def text_to_children(text_nodes)
+def text_to_children(text_nodes):
     leaf_html_nodes = []
     for text_node in text_nodes:
         leaf_html_nodes.append(text_node_to_html_node(text_node))
