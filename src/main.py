@@ -1,9 +1,10 @@
 from textnode import TextNode, TextType
-print("hello world")
+from static_copy import copy_to_dest_dir
+
 
 def main():
-    textNode = TextNode("This is some anchor text", TextType.LINK, "https://www.boot.dev")
-    print(textNode)
-
+    print(f"Transferring content from ./static to ./public")
+    print(f"Removing directory ./public")
+    copy_to_dest_dir("./static", "./public", overwrite=True)
 
 main()
