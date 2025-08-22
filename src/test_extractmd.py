@@ -1,5 +1,5 @@
 import unittest
-from extractmd import extract_markdown_link, extract_markdown_images
+from extractmd import extract_markdown_link, extract_markdown_images, extract_title
 
 class TestExtractLinks(unittest.TestCase):
 
@@ -33,3 +33,10 @@ class TestExtractLinks(unittest.TestCase):
         self.assertEqual(images[0][0], "youtube link")
         self.assertEqual(images[0][1], "https://www.youtube.com/@bootdotdev")
 
+
+    def test_extract_title(self):
+        md = """# I am a title
+        # I am another title
+        # I am a third title"""
+        title = extract_title(md)
+        self.assertEqual("I am a title", title)
