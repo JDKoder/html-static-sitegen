@@ -7,7 +7,8 @@ import shutil
     I recommend logging the path of each file you copy, so you can see what's happening as you run and debug your code."""
 
 def copy_to_dest_dir(src_dir, dest_dir, overwrite=False):
-    if overwrite:
+
+    if overwrite and os.path.exists(dest_dir):
         print(f"Deleting tree at {dest_dir}")
         shutil.rmtree(dest_dir)
 
